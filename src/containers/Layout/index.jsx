@@ -1,0 +1,272 @@
+import PropTypes from 'prop-types';
+import React, { Suspense, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Outlet, useNavigate } from 'react-router-dom';
+
+import { Avatar, Col, Dropdown, Image, Layout, Space } from 'antd';
+
+import LoadingComponent from '../../components/Loading/index.jsx';
+import useMediaQuery from '../../hooks/useMediaQuery';
+import styled from './Layout.style';
+
+const { Sider } = Layout;
+
+function LayoutContainer() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const collapsed = useSelector((state) => state.authReducer.collapsed);
+
+  const userProfile = useSelector(
+    (state) => state?.authReducer?.profileData?.payload?.user
+  );
+
+  const firstName = userProfile?.firstName ? userProfile?.firstName : 'N/A';
+  const lastName = userProfile?.lastName ? userProfile?.lastName : '';
+
+  const fullName = firstName + ' ' + lastName;
+
+  const isMatched = useMediaQuery('(max-width: 769px)');
+  const tablet = useMediaQuery('(max-width: 991px)');
+  const [selectedKeys, setSelectedKeys] = useState(window.location.pathname);
+  const [logoutOpen, setLogoutOpen] = useState(false);
+
+  // React.useEffect(() => {
+  //   dispatch(toggleCollapsed(isMatched));
+  // }, [isMatched]);
+
+  useEffect(() => {
+  }, []);
+
+  const menuItems = [
+    {
+      key: '/panel/dashboard',
+      name: 'dashboard',
+      label: 'Dashboard',
+     
+    },
+    {
+      key: '/panel/warehouse',
+      name: 'warehouse',
+      label: 'Warehouse',
+      
+    },
+    
+   
+  ];
+
+  // const dropdownItems = [
+  //   {
+  //     key: '1',
+  //     name: 'my_profile',
+  //     label: 'My Profile',
+  //     src: '/svg-icons/profile.svg',
+  //     onClick: () => navigate('/panel/profile'),
+  //   },
+  //   {
+  //     key: '2',
+  //     name: 'account_setting',
+  //     label: 'Account Setting',
+  //     src: '/svg-icons/setting.svg',
+  //   },
+  //   {
+  //     key: '3',
+  //     name: 'logout',
+  //     label: 'Logout',
+  //     src: '/svg-icons/logout_unselect.svg',
+  //     onClick: () => setLogoutOpen(true),
+  //   },
+  // ];
+
+  const handleOnMenuItemClick = (currentItem) => {
+    if (typeof currentItem.key === 'string') {
+      setSelectedKeys(currentItem.key);
+      navigate(currentItem.key);
+    }
+  };
+
+  return (
+    <styled.LayoutWrapper>
+      <Sider
+        trigger={null}
+        collapsible
+        collapsed={collapsed}
+        theme="light"
+        collapsedWidth={'80px'}
+        width={tablet ? 232 : 240}
+      >
+        {/* <styled.LogoWrapper
+          style={{ width: `${!collapsed ? '15rem' : '5rem'}` }}
+        >
+          {!collapsed ? (
+            <Image
+              src="/svg-icons/logo.svg"
+              alt="logo"
+              preview={false}
+              width={120}
+              height={43}
+            />
+          ) : (
+            <Image
+              src="/svg-icons/logo2.svg"
+              alt="logo"
+              preview={false}
+              width={31}
+              height={27}
+            />
+          )}
+        </styled.LogoWrapper>
+        <styled.MenuWrapper
+          theme="light"
+          mode="inline"
+          onClick={handleOnMenuItemClick}
+          defaultSelectedKeys={[selectedKeys]}
+          items={menuItems?.map((item) => {
+            return {
+              key: item.key,
+              icon: (
+                <div>
+                  <Image
+                    src={item.src}
+                    alt={item.name}
+                    width={15}
+                    height={15}
+                    preview={false}
+                  />
+                </div>
+              ),
+              label: item.label,
+              children: item.children
+                ? item.children.map((child) => ({
+                    key: child.key,
+                    icon: (
+                      <div>
+                        <Image
+                          src={child.src}
+                          alt={child.label}
+                          width={15}
+                          height={15}
+                          preview={false}
+                        />
+                      </div>
+                    ),
+                    label: child.label,
+                  }))
+                : undefined,
+            };
+          })}
+        /> */}
+      </Sider>
+      <Layout>
+        <styled.HeaderWrapper>
+          <styled.Toggler
+            type="link"
+            icon=""
+            // onClick={() => dispatch(toggleCollapsed(!collapsed))}
+          >
+            {/* <Image
+              src={
+                !collapsed
+                  ? '/svg-icons/toggle_in.svg'
+                  : '/svg-icons/toggle_out.svg'
+              }
+              alt="toggler"
+              preview={false}
+            /> */}
+          </styled.Toggler>
+          <Space align={'baseline'} className="right-nav-content">
+            {/* <Image
+              src="/svg-icons/bell_icon.svg"
+              alt="toggler"
+              width={22}
+              height={22}
+              preview={false}
+            /> */}
+            <Dropdown
+              placement="bottom"
+              dropdownRender={(menu) => (
+                <div>
+                  <styled.MenuBar
+                    className="abc"
+                    style={{
+                      backgroundImage:
+                        'linear-gradient(to right, #E11D07, #1B1B1B)',
+                      padding: '8px 14px 8px 14px',
+                      borderRadius: '12px 12px 0px 0px',
+                    }}
+                  >
+                    <Col>
+                      <Avatar size={40} src="/svg-icons/user2.svg" />
+                    </Col>
+                    <Col>
+                      <styled.User style={{ color: 'white' }}>
+                        {fullName}
+                      </styled.User>
+                      <br />
+                      <styled.Role style={{ color: 'white' }}>
+                        {userProfile?.role === 'super_admin'
+                          ? 'Super Admin'
+                          : 'Customer'}
+                      </styled.Role>
+                    </Col>
+                  </styled.MenuBar>
+                  {React.cloneElement(menu, {
+                    style: {
+                      paddingBlock: '16px',
+                      borderRadius: '0px 0px 12px 12px',
+                    },
+                  })}
+                </div>
+              )}
+              menu={{
+                items: dropdownItems?.map((item) => {
+                  return {
+                    key: item.key,
+                    label: item.label,
+                    icon: (
+                      <div>
+                        <Image
+                          src={item.src}
+                          alt={item.name}
+                          width={16}
+                          height={16}
+                          preview={false}
+                        />
+                      </div>
+                    ),
+                    onClick: item.onClick,
+                  };
+                }),
+              }}
+              trigger={['click']}
+            >
+              <styled.MenuBar>
+                <Col>
+                  <Avatar
+                    size={32}
+                    src="/svg-icons/user2.svg"
+                    className="avatar"
+                  />
+                </Col>
+              </styled.MenuBar>
+            </Dropdown>
+          </Space>
+          <Logout open={logoutOpen} setLogoutOpen={setLogoutOpen} />
+        </styled.HeaderWrapper>
+        <styled.ContentWrapper>
+          <Suspense fallback={<LoadingComponent />}>
+            <Outlet />
+          </Suspense>
+        </styled.ContentWrapper>
+        <styled.FooterWrapper>
+          © 2024 Digilogix - All Rights Reserved
+        </styled.FooterWrapper>
+      </Layout>
+    </styled.LayoutWrapper>
+  );
+}
+
+export default LayoutContainer;
+LayoutContainer.propTypes = {
+  iscompact: PropTypes.any,
+};

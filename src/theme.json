@@ -1,0 +1,73 @@
+{
+  "components": {
+    "Radio": {
+      "colorPrimary":"rgb(186, 151, 117)",
+      "colorPrimaryBorder":"rgb(186, 151, 117)",
+      "colorPrimaryHover":"rgb(186, 151, 117)"
+    },
+    "Button": {
+      "defaultColor": "rgb(186, 151, 117)",
+      "colorPrimary": "rgb(186, 151, 117)",
+      "colorPrimaryHover": "rgb(151, 123, 94)",
+      "colorPrimaryBorder": "rgb(151, 123, 94)"
+    },
+    "Input": {
+      "colorPrimary": "rgb(186, 151, 117)",
+      "colorPrimaryHover": "rgb(151, 123, 94)",
+      "colorPrimaryActive":  "rgb(151, 123, 94)",
+      "paddingBlock": 8,
+      "colorBgContainer": "#ffffff",
+      "borderRadius": 8
+    },
+    "Table": {
+      "borderColor": "rgb(255, 255, 255)",
+      "bodySortBg": "rgb(255, 255, 255)",
+      "headerBg": "rgb(250, 251, 255)",
+      "colorLink":"rgb(186, 151, 117)",
+      "colorLinkActive":"rgb(186, 151, 117)",
+      "colorLinkHover": "rgb(249, 107, 91)",
+      "colorPrimary":"rgb(186, 151, 117)",
+      "rowHoverBg": "rgb(253, 245, 244)",
+      "rowSelectedBg": "rgb(254, 248, 248)",
+      "rowSelectedHoverBg": "rgb(254, 248, 248)",
+      "headerSplitColor": "rgb(255, 255, 255)"
+    },
+    "Select": {
+      "optionSelectedBg": "rgb(253, 243, 244)",
+      "colorPrimaryHover":"rgb(186, 151, 117)",
+      "colorPrimary":"rgb(186, 151, 117)",
+      "optionActiveBg": "#fef8f8"
+    },
+    "Menu": {
+      "itemColor": "#1B1B1B",
+      "itemHoverColor": "#1B1B1B",
+      "itemSelectedColor": "#1B1B1B",
+      "itemSelectedBg": "#FEF8F8",
+      "itemActiveBg": "#FEF8F8",
+      "itemHoverBg": "#ffffff00",
+      "subMenuItemBg": "#fafbff"
+    },
+    "Pagination": {
+      "colorPrimary":"rgb(186, 151, 117)",
+      "colorPrimaryHover": "rgb(155, 39, 39)"
+    },
+    "DatePicker": {
+      "colorPrimary":"rgb(186, 151, 117)",
+      "hoverBorderColor":"rgb(186, 151, 117)",
+      "activeBorderColor":"rgb(186, 151, 117)",
+      "cellHoverBg": "#fef8f8",
+      "cellActiveWithRangeBg": "#FEF8F8"
+    },
+    "Checkbox": {
+      "colorPrimary":"rgb(186, 151, 117)",
+      "colorPrimaryHover":"rgb(186, 151, 117)"
+    },
+    "Dropdown": {
+      "controlItemBgHover": "#fef8f8"
+    },
+    "Steps": {
+      "colorPrimary": "#E11D07",
+      "lineWidth": 2
+    }
+  }
+}
