@@ -33,7 +33,7 @@ function SignupForm() {
           >
             <Input className="inputs" size="large" placeholder="Enter Name" />
           </Form.Item>
-          <Form.Item
+          {/* <Form.Item
             label="User Name"
             name="userName"
             // rules={[{ required: true, message: "Last name is required!" }]}
@@ -43,19 +43,14 @@ function SignupForm() {
               size="large"
               placeholder="Enter Username"
             />
-          </Form.Item>
+          </Form.Item> */}
           <Form.Item label="Email" name="email">
             <Input className="inputs" size="large" placeholder="Enter Email" />
           </Form.Item>
           <Form.Item
             label="Password"
             name="password"
-            rules={[
-              {
-                required: true,
-                message: "Please input your password!",
-              },
-            ]}
+           
           >
             <Input.Password />
           </Form.Item>

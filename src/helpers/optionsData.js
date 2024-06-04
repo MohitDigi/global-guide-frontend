@@ -202,7 +202,7 @@ export const statusArray = [
   'Cancelled',
   'Distribution',
   'In Transit',
-  'In Warehouse',
+  'In Company',
   'Invoiced',
   'On Route',
   'Pending',

@@ -7,7 +7,8 @@ import http from "../../libs/http";
 // Default State
 const initialState = {
   isLoading: false,
-  isAuthenticated: null,
+  // isAuthenticated: null,
+  isAuthenticated: true,
 };
 
 // Redux Actions
@@ -28,7 +29,29 @@ export const checkUserAuth = createAsyncThunk(
     }
   }
 );
+export const loginUser = createAsyncThunk(
+  "application/loginUser",
+  async (payload, thunkAPI) => {
+    console.log("slice ==", payload);
+    try {
+      const response = await http.post("/user/login", payload);
+      console.log(response);
+      // Handle API errors
+      if (!response.data.success)
+        return thunkAPI.rejectWithValue(response.data?.message);
+      notification.success({
+        message: "Login successfully",
+      });
 
+      return thunkAPI.fulfillWithValue(response.data);
+    } catch (error) {
+      notification.error({
+        message: "Invaild Creds",
+      });
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 export const logoutUser = createAsyncThunk(
   "application/logoutUser",
   async (_, thunkAPI) => {
@@ -51,18 +74,29 @@ const authSlice = createSlice({
       })
       .addCase(checkUserAuth.fulfilled, (state, payload) => {
         state.isLoading = false;
-        state.isAuthenticated = payload;
+        state.isAuthenticated = true;
       })
       .addCase(checkUserAuth.rejected, (state) => {
         state.isLoading = false;
         state.isAuthenticated = false;
       })
-
+      // login user
+      .addCase(loginUser.pending, (state) => {
+        state.isLoading = true;
+        state.isAuthenticated = null;
+      })
+      .addCase(loginUser.fulfilled, (state, payload) => {
+        state.isLoading = false;
+        state.isAuthenticated = payload;
+      })
+      .addCase(loginUser.rejected, (state) => {
+        state.isLoading = false;
+        state.isAuthenticated = false;
+      })
       // Logout User
       .addCase(logoutUser.fulfilled, (state) => {
         state.isLoading = false;
         state.isAuthenticated = false;
-        state.otpLogin = false;
       });
   },
 });

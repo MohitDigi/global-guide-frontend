@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import PhoneInput, { formatPhoneNumberIntl } from "react-phone-number-input";
-import { getCountryCallingCode } from "react-phone-number-input/input";
-import "react-phone-number-input/style.css";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { Button, Form, Image, Input, Typography } from "antd";
 import styled from "./Login.style";
+import { loginUser } from "../../../redux/slices/authSlice";
 
 const { Paragraph, Title } = Typography;
 
@@ -14,12 +13,12 @@ function LoginFormComponent() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [selectedCountry, setSelectedCountry] = useState();
-  const [phoneNumber, setPhoneNumber] = useState();
-
   const handleChange = (value) => {};
 
-  const onFinish = () => {};
+  const onFinish = (values) => {
+    console.log(values)
+    dispatch(loginUser(values));
+  };
 
   return (
     <styled.Wrapper>
@@ -29,8 +28,8 @@ function LoginFormComponent() {
         <Form layout="vertical" onFinish={onFinish} requiredMark={false}>
           <div className="phone-input">
             <Form.Item
-              label="Username"
-              name="username"
+              label="Email"
+              name="email"
               rules={[
                 {
                   required: true,
@@ -44,12 +43,12 @@ function LoginFormComponent() {
             <Form.Item
               label="Password"
               name="password"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your password!",
-                },
-              ]}
+              // rules={[
+              //   {
+              //     required: true,
+              //     message: "Please input your password!",
+              //   },
+              // ]}
             >
               <Input.Password />
             </Form.Item>
@@ -60,8 +59,8 @@ function LoginFormComponent() {
         </Form>
         <div>
           <Title className="register" level={5}>
-            You don’t have an account?{" "}
-            <span onClick={() => navigate("/auth/signup")}>Register</span>
+            You don’t have an account?
+            <span onClick={() => navigate("/auth/login")}>Register</span>
           </Title>
         </div>
       </div>

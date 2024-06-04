@@ -46,9 +46,9 @@ function LayoutContainer() {
      
     },
     {
-      key: '/panel/warehouse',
-      name: 'warehouse',
-      label: 'Warehouse',
+      key: '/panel/company',
+      name: 'company',
+      label: 'Company',
       
     },
     

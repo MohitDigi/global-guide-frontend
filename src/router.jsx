@@ -14,7 +14,7 @@ const AuthLoginPage = React.lazy(() => import("./pages/Auth/Login"));
 const AuthSignupPage = React.lazy(() => import("./pages/Auth/Signup"));
 const AuthRegisterPage = React.lazy(() => import("./pages/Auth/Register"));
 const DashboardPage = React.lazy(() => import("./pages/Dashboard"));
-const WarehousePage = React.lazy(() => import("./pages/Warehouse"));
+const CompanyPage = React.lazy(() => import("./pages/Company"));
 
 function ProtectedRoute({ component }) {
   const isAuthenticated = useSelector(
@@ -54,11 +54,11 @@ export default function AppRouter() {
             path="login"
             element={<RestrictedRoute component={<AuthLoginPage />} />}
           />
-          <Route path="signup" element={<AuthSignupPage />} />
-          <Route
+          {/* <Route path="signup" element={<AuthSignupPage />} /> */}
+          {/* <Route
             path="register"
             element={<RestrictedRoute component={<AuthRegisterPage />} />}
-          />
+          /> */}
         </Route>
 
         <Route path="/panel" element={<LayoutContainer />}>
@@ -69,12 +69,13 @@ export default function AppRouter() {
 
           <Route
             path="dashboard"
+            // element={<DashboardPage/>}
             element={<ProtectedRoute component={<DashboardPage />} />}
             index
           />
           <Route
-            path="warehouse"
-            element={<ProtectedRoute component={<WarehousePage />} />}
+            path="company"
+            element={<ProtectedRoute component={<CompanyPage />} />}
           />
 
           <Route

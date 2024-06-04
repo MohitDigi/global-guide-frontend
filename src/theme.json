@@ -9,7 +9,8 @@
       "defaultColor": "rgb(186, 151, 117)",
       "colorPrimary": "rgb(186, 151, 117)",
       "colorPrimaryHover": "rgb(151, 123, 94)",
-      "colorPrimaryBorder": "rgb(151, 123, 94)"
+      "colorPrimaryBorder": "rgb(151, 123, 94)",
+      "colorPrimaryActive": "rgb(151, 123, 94)"
     },
     "Input": {
       "colorPrimary": "rgb(186, 151, 117)",
