@@ -55,8 +55,30 @@ export const loginUser = createAsyncThunk(
     }
   }
 );
-export const getCompanyList = createAsyncThunk(
-  "application/getCompanyList",
+// export const getCompanyList = createAsyncThunk(
+//   "application/getCompanyList",
+//   async (payload, thunkAPI) => {
+//     console.log("slice ==", payload);
+//     try {
+//       const response = await adminHttp.get("/company", payload);
+//       console.log(response.status);
+//       // if (response.status === 200) {
+//       //   notification.success({
+//       //     message: "Login successfully",
+//       //   });
+//       // }
+
+//       return thunkAPI.fulfillWithValue(response.data?.items);
+//     } catch (error) {
+//       notification.error({
+//         message: "Invaild Creds",
+//       });
+//       return thunkAPI.rejectWithValue(error);
+//     }
+//   }
+// );
+export const createCompany = createAsyncThunk(
+  "application/createCompany",
   async (payload, thunkAPI) => {
     console.log("slice ==", payload);
     try {
@@ -125,19 +147,33 @@ const authSlice = createSlice({
         state.isAuthenticated = false;
       })
       // company list
-      .addCase(getCompanyList.pending, (state) => {
-        state.isLoading = true;
-        state.companyList = null;
-      })
-      .addCase(getCompanyList.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.companyList = payload;
-        console.log("payload =======", payload);
-      })
-      .addCase(getCompanyList.rejected, (state) => {
-        state.isLoading = false;
-        state.companyList = false;
-      })
+      // .addCase(getCompanyList.pending, (state) => {
+      //   state.isLoading = true;
+      //   state.companyList = null;
+      // })
+      // .addCase(getCompanyList.fulfilled, (state, { payload }) => {
+      //   state.isLoading = false;
+      //   state.companyList = payload;
+      //   console.log("payload =======", payload);
+      // })
+      // .addCase(getCompanyList.rejected, (state) => {
+      //   state.isLoading = false;
+      //   state.companyList = false;
+      // })
+       // company list
+      //  .addCase(getCompanyList.pending, (state) => {
+      //   state.isLoading = true;
+      //   state.companyList = null;
+      // })
+      // .addCase(getCompanyList.fulfilled, (state, { payload }) => {
+      //   state.isLoading = false;
+      //   state.companyList = payload;
+      //   console.log("payload =======", payload);
+      // })
+      // .addCase(getCompanyList.rejected, (state) => {
+      //   state.isLoading = false;
+      //   state.companyList = false;
+      // })
       // Logout User
       .addCase(logoutUser.fulfilled, (state) => {
         state.isLoading = false;

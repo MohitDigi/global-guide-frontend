@@ -7,7 +7,7 @@ import { debounce } from "lodash";
 
 import CreateNewCompany from "../../components/Modal/CreateNewCompany";
 import CompanyTable from "../../components/Tables/CompanyTable";
-import { getCompanyList } from "../../redux/slices/authSlice";
+import { getCompanyList } from "../../redux/slices/companySlice";
 import styled from "./Company.style";
 
 const { Title } = Typography;
