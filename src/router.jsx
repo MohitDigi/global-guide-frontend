@@ -20,12 +20,12 @@ function ProtectedRoute({ component }) {
   const isAuthenticated = useSelector(
     (state) => state.authReducer.isAuthenticated
   );
+  console.log("isAuthenticated", isAuthenticated);
   if (isAuthenticated === false)
     return <Navigate to="/auth/login" replace={true} />;
 
   return component;
 }
-
 function RestrictedRoute({ component }) {
   const isCookiePresent = getCookie("accessToken");
   if (isCookiePresent) return <Navigate to="/panel/dashboard" replace={true} />;
@@ -35,7 +35,6 @@ function RestrictedRoute({ component }) {
 ProtectedRoute.propTypes = {
   component: PropTypes.object,
 };
-
 RestrictedRoute.propTypes = {
   component: PropTypes.object,
 };
@@ -54,11 +53,6 @@ export default function AppRouter() {
             path="login"
             element={<RestrictedRoute component={<AuthLoginPage />} />}
           />
-          {/* <Route path="signup" element={<AuthSignupPage />} /> */}
-          {/* <Route
-            path="register"
-            element={<RestrictedRoute component={<AuthRegisterPage />} />}
-          /> */}
         </Route>
 
         <Route path="/panel" element={<LayoutContainer />}>
@@ -69,7 +63,6 @@ export default function AppRouter() {
 
           <Route
             path="dashboard"
-            // element={<DashboardPage/>}
             element={<ProtectedRoute component={<DashboardPage />} />}
             index
           />

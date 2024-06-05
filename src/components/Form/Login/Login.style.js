@@ -43,7 +43,7 @@ export const Wrapper = styled.div`
       margin-right: 0px;
     }
     .PhoneInputCountry:hover {
-      border: 2px solid #e11d07;
+      border: 2px solid #BA9775;
     }
     .PhoneInputInput {
       height: 40px;
@@ -52,7 +52,7 @@ export const Wrapper = styled.div`
       border: 2px solid #d0d5dd;
     }
     .PhoneInputInput:hover {
-      border: 2px solid #e11d07;
+      border: 2px solid #BA9775;
     }
     .PhoneInputInput--focus {
       border: 2px solid red;

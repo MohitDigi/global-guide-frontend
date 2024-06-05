@@ -23,7 +23,7 @@
     "Table": {
       "borderColor": "rgb(255, 255, 255)",
       "bodySortBg": "rgb(255, 255, 255)",
-      "headerBg": "rgb(250, 251, 255)",
+      "headerBg": "rgb(249, 244, 238)",
       "colorLink":"rgb(186, 151, 117)",
       "colorLinkActive":"rgb(186, 151, 117)",
       "colorLinkHover": "rgb(249, 107, 91)",
@@ -67,7 +67,7 @@
       "controlItemBgHover": "#fef8f8"
     },
     "Steps": {
-      "colorPrimary": "#E11D07",
+      "colorPrimary": "#BA9775",
       "lineWidth": 2
     }
   }

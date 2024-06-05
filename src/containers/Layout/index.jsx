@@ -1,13 +1,16 @@
-import PropTypes from 'prop-types';
-import React, { Suspense, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Outlet, useNavigate } from 'react-router-dom';
+import PropTypes from "prop-types";
+import React, { Suspense, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Outlet, useNavigate } from "react-router-dom";
 
-import { Avatar, Col, Dropdown, Image, Layout, Space } from 'antd';
+import { Avatar, Col, Dropdown, Image, Layout, Space } from "antd";
 
-import LoadingComponent from '../../components/Loading/index.jsx';
-import useMediaQuery from '../../hooks/useMediaQuery';
-import styled from './Layout.style';
+import LoadingComponent from "../../components/Loading/index.jsx";
+import Logout from "../../components/Modal/Logout/index.jsx";
+import useMediaQuery from "../../hooks/useMediaQuery";
+import { toggleCollapsed } from "../../redux/slices/authSlice.js";
+// import { getProfile } from '../../redux/slices/authSlice.js';
+import styled from "./Layout.style";
 
 const { Sider } = Layout;
 
@@ -17,69 +20,129 @@ function LayoutContainer() {
 
   const collapsed = useSelector((state) => state.authReducer.collapsed);
 
-  const userProfile = useSelector(
-    (state) => state?.authReducer?.profileData?.payload?.user
-  );
+  const userProfile = useSelector((state) => state.authReducer.profileData);
+  // console.log("userProfile", userProfile);
 
-  const firstName = userProfile?.firstName ? userProfile?.firstName : 'N/A';
-  const lastName = userProfile?.lastName ? userProfile?.lastName : '';
+  const fullName = userProfile?.name ? userProfile?.name : "N/A";
+  // const lastName = userProfile?.lastName ? userProfile?.lastName : '';
 
-  const fullName = firstName + ' ' + lastName;
+  // const fullName = firstName + ' ' + lastName;
 
-  const isMatched = useMediaQuery('(max-width: 769px)');
-  const tablet = useMediaQuery('(max-width: 991px)');
+  const isMatched = useMediaQuery("(max-width: 769px)");
+  const tablet = useMediaQuery("(max-width: 991px)");
   const [selectedKeys, setSelectedKeys] = useState(window.location.pathname);
   const [logoutOpen, setLogoutOpen] = useState(false);
 
-  // React.useEffect(() => {
-  //   dispatch(toggleCollapsed(isMatched));
-  // }, [isMatched]);
+  React.useEffect(() => {
+    dispatch(toggleCollapsed(isMatched));
+  }, [isMatched]);
 
-  useEffect(() => {
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getProfile());
+  // }, []);
 
   const menuItems = [
     {
-      key: '/panel/dashboard',
-      name: 'dashboard',
-      label: 'Dashboard',
-     
+      key: "/panel/dashboard",
+      name: "dashboard",
+      label: "Dashboard",
+      src:
+        selectedKeys === "/panel/dashboard"
+          ? "/svg-icons/ic_dashboard.svg"
+          : "/svg-icons/ic_dashboard_unselect.svg",
     },
     {
-      key: '/panel/company',
-      name: 'company',
-      label: 'Company',
-      
+      key: "/panel/company",
+      name: "company",
+      label: "Company",
+      src:
+        selectedKeys === "/panel/warehouse"
+          ? "/svg-icons/ic_warehouse.svg"
+          : "/svg-icons/ic_warehouse_unselect.svg",
     },
-    
-   
+    {
+      key: "/panel/shipment",
+      name: "shipment",
+      label: "Shipment",
+      src:
+        selectedKeys === "/panel/shipment"
+          ? "/svg-icons/ic_shipment.svg"
+          : "/svg-icons/ic_shipment_unselect.svg",
+    },
+    {
+      key: "/panel/invoice",
+      name: "invoice",
+      label: "Invoice",
+      src:
+        selectedKeys === "/panel/invoice"
+          ? "/svg-icons/ic_invoice.svg"
+          : "/svg-icons/ic_invoice_unselect.svg",
+    },
+    {
+      key: "/panel/inventory",
+      name: "inventory",
+      label: "Inventory",
+      src:
+        selectedKeys === "/panel/inventory"
+          ? "/svg-icons/ic_inventory.svg"
+          : "/svg-icons/ic_inventory_unselect.svg",
+    },
+    {
+      key: "/panel/users-management",
+      name: "users_management",
+      label: "Users Management",
+      src:
+        selectedKeys === "/panel/users-management"
+          ? "/svg-icons/ic_user management.svg"
+          : "/svg-icons/ic_user management_unselect.svg",
+      children: [
+        {
+          key: "/panel/users-management/customer",
+          name: "customer",
+          label: "Customer",
+          src:
+            selectedKeys === "/panel/users-management/customer"
+              ? "/svg-icons/ic_customer.svg"
+              : "/svg-icons/ic_customer_unselect.svg",
+        },
+        {
+          key: "/panel/users-management/driver",
+          name: "driver",
+          label: "Driver",
+          src:
+            selectedKeys === "/panel/users-management/driver"
+              ? "/svg-icons/ic_driver.svg"
+              : "/svg-icons/ic_driver_unselect.svg",
+        },
+      ],
+    },
   ];
 
-  // const dropdownItems = [
-  //   {
-  //     key: '1',
-  //     name: 'my_profile',
-  //     label: 'My Profile',
-  //     src: '/svg-icons/profile.svg',
-  //     onClick: () => navigate('/panel/profile'),
-  //   },
-  //   {
-  //     key: '2',
-  //     name: 'account_setting',
-  //     label: 'Account Setting',
-  //     src: '/svg-icons/setting.svg',
-  //   },
-  //   {
-  //     key: '3',
-  //     name: 'logout',
-  //     label: 'Logout',
-  //     src: '/svg-icons/logout_unselect.svg',
-  //     onClick: () => setLogoutOpen(true),
-  //   },
-  // ];
+  const dropdownItems = [
+    {
+      key: "1",
+      name: "my_profile",
+      label: "My Profile",
+      src: "/svg-icons/profile.svg",
+      onClick: () => navigate("/panel/profile"),
+    },
+    {
+      key: "2",
+      name: "account_setting",
+      label: "Account Setting",
+      src: "/svg-icons/setting.svg",
+    },
+    {
+      key: "3",
+      name: "logout",
+      label: "Logout",
+      src: "/svg-icons/logout_unselect.svg",
+      onClick: () => setLogoutOpen(true),
+    },
+  ];
 
   const handleOnMenuItemClick = (currentItem) => {
-    if (typeof currentItem.key === 'string') {
+    if (typeof currentItem.key === "string") {
       setSelectedKeys(currentItem.key);
       navigate(currentItem.key);
     }
@@ -92,11 +155,11 @@ function LayoutContainer() {
         collapsible
         collapsed={collapsed}
         theme="light"
-        collapsedWidth={'80px'}
+        collapsedWidth={"80px"}
         width={tablet ? 232 : 240}
       >
-        {/* <styled.LogoWrapper
-          style={{ width: `${!collapsed ? '15rem' : '5rem'}` }}
+        <styled.LogoWrapper
+          style={{ width: `${!collapsed ? "15rem" : "5rem"}` }}
         >
           {!collapsed ? (
             <Image
@@ -104,15 +167,15 @@ function LayoutContainer() {
               alt="logo"
               preview={false}
               width={120}
-              height={43}
+              height={65}
             />
           ) : (
             <Image
               src="/svg-icons/logo2.svg"
               alt="logo"
               preview={false}
-              width={31}
-              height={27}
+              width={65}
+              height={45}
             />
           )}
         </styled.LogoWrapper>
@@ -155,33 +218,34 @@ function LayoutContainer() {
                 : undefined,
             };
           })}
-        /> */}
+        />
       </Sider>
       <Layout>
         <styled.HeaderWrapper>
           <styled.Toggler
             type="link"
             icon=""
-            // onClick={() => dispatch(toggleCollapsed(!collapsed))}
+            onClick={() => dispatch(toggleCollapsed(!collapsed))}
           >
-            {/* <Image
+            <Image
               src={
                 !collapsed
-                  ? '/svg-icons/toggle_in.svg'
-                  : '/svg-icons/toggle_out.svg'
+                  ? "/svg-icons/toggle_in.svg"
+                  : "/svg-icons/toggle_out.svg"
               }
               alt="toggler"
               preview={false}
-            /> */}
+            />
           </styled.Toggler>
-          <Space align={'baseline'} className="right-nav-content">
-            {/* <Image
+          <Space align={"baseline"} className="right-nav-content">
+            <Image
               src="/svg-icons/bell_icon.svg"
               alt="toggler"
               width={22}
               height={22}
               preview={false}
-            /> */}
+            />
+
             <Dropdown
               placement="bottom"
               dropdownRender={(menu) => (
@@ -190,30 +254,31 @@ function LayoutContainer() {
                     className="abc"
                     style={{
                       backgroundImage:
-                        'linear-gradient(to right, #E11D07, #1B1B1B)',
-                      padding: '8px 14px 8px 14px',
-                      borderRadius: '12px 12px 0px 0px',
+                        "linear-gradient(to right, #BA9775, #1B1B1B)",
+                      padding: "8px 14px 8px 14px",
+                      borderRadius: "12px 12px 0px 0px",
                     }}
                   >
                     <Col>
                       <Avatar size={40} src="/svg-icons/user2.svg" />
                     </Col>
                     <Col>
-                      <styled.User style={{ color: 'white' }}>
-                        {fullName}
+                      <styled.User style={{ color: "white" }}>
+                        User - {fullName}
                       </styled.User>
                       <br />
-                      <styled.Role style={{ color: 'white' }}>
-                        {userProfile?.role === 'super_admin'
+                      <styled.Role style={{ color: "white" }}>
+                        {/* {userProfile?.role === 'super_admin'
                           ? 'Super Admin'
-                          : 'Customer'}
+                          : 'Customer'} */}
+                        Admin
                       </styled.Role>
                     </Col>
                   </styled.MenuBar>
                   {React.cloneElement(menu, {
                     style: {
-                      paddingBlock: '16px',
-                      borderRadius: '0px 0px 12px 12px',
+                      paddingBlock: "16px",
+                      borderRadius: "0px 0px 12px 12px",
                     },
                   })}
                 </div>
@@ -238,7 +303,7 @@ function LayoutContainer() {
                   };
                 }),
               }}
-              trigger={['click']}
+              trigger={["click"]}
             >
               <styled.MenuBar>
                 <Col>
@@ -258,9 +323,9 @@ function LayoutContainer() {
             <Outlet />
           </Suspense>
         </styled.ContentWrapper>
-        <styled.FooterWrapper>
-          © 2024 Digilogix - All Rights Reserved
-        </styled.FooterWrapper>
+        {/* <styled.FooterWrapper>
+          © 2024  - All Rights Reserved
+        </styled.FooterWrapper> */}
       </Layout>
     </styled.LayoutWrapper>
   );

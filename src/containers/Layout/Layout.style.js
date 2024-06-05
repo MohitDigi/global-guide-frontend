@@ -9,7 +9,8 @@ export const LayoutWrapper = styled(Layout)`
 `;
 export const LogoWrapper = styled(Row)`
   height: 3.69rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+  margin-top: 12px;
   justify-content: center;
   align-items: center;
 `;
@@ -46,6 +47,7 @@ export const HeaderWrapper = styled(Layout.Header)`
   align-items: center;
   padding-right: 2rem;
   .right-nav-content{
+
     gap: 20px;
     // justify-content: space-between;
     max-width: 173px;
@@ -88,7 +90,7 @@ export const MenuWrapper = styled(Menu)`
     }
     &.ant-menu-item-selected {
       &:before {
-        background-color: #f00;
+        background-color: #BA9775;
       }
     }
   }
@@ -104,7 +106,7 @@ export const ContentWrapper = styled(Layout.Content)`
   }
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-  background-color: #fafbff;
+  background-color: #F9F4EE;
 `;
 
 export const FooterWrapper = styled(Layout.Footer)`

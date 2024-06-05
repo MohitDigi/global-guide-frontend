@@ -5,10 +5,9 @@ import { Row } from 'antd';
 
 import LoginFormComponent from '../../../components/Form/Login';
 import styled from './Login.style';
-import SignupForm from '../../../components/Form/Signup';
+// import SignupForm from '../../../components/Form/Signup';
 
 function LoginPage() {
-  const isOtpSent = useSelector((state) => state?.authReducer?.otpLogin);
   const flag = true;
   return (
     <styled.Wrapper>
