@@ -19,7 +19,8 @@ const CompanyPage = () => {
   const [filters, setFilters] = useState({ sortBy: "latest" });
 
   const dispatch = useDispatch();
-
+  const companyList = useSelector((state) => state?.companyReducer?.data?.payload);
+  console.log("companyList", companyList);
   const handleChange = debounce((event) => {
     const searchTerm = event.target.value;
     if (searchTerm !== 0) {

@@ -18,10 +18,13 @@ import styled from "./CompanyTable.style";
 
 const CompanyTable = ({ filters }) => {
   const dispatch = useDispatch();
-  // const WarehouseList = useSelector(
+  // const companyList = useSelector(
   //   (state) => state?.warehouseReducer?.data?.payload?.warehouses
   // );
-
+  const companyList = useSelector(
+    (state) => state?.companyReducer?.data?.payload
+  );
+  console.log("companyList", companyList);
   const [viewModal, setViewModal] = useState(false);
   const [updateModal, setUpdateModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
@@ -33,21 +36,21 @@ const CompanyTable = ({ filters }) => {
 
   const columns = [
     {
-      title: "ID",
-      dataIndex: "id",
-      key: "id",
-      render: (_, record) => (
-        <span >
-          {record.id ? record.id : "N/A"}
-        </span>
-      ),
+      title: "Company ID",
+      dataIndex: "companyID",
+      key: "companyID",
+      render: (_, record) => <span>{record.companyID ? record.companyID : "N/A"}</span>,
       width: "126.86px",
     },
     {
       title: "Company Name",
       dataIndex: "title",
       key: "title",
-      render: (_, record) => <span style={{ color: "#BA9775" }}>{record.title ? record.title : "N/A"}</span>,
+      render: (_, record) => (
+        <span style={{ color: "#BA9775" }}>
+          {record.companyName ? record.companyName : "N/A"}
+        </span>
+      ),
       width: 200,
     },
     {
@@ -133,11 +136,11 @@ const CompanyTable = ({ filters }) => {
       <styled.Wrapper>
         <Table
           columns={columns}
-          // dataSource={WarehouseList ? WarehouseList : []}
+          dataSource={companyList ? companyList : []}
           rowKey={(record) => record.id}
           rowSelection={{ type: "checkbox" }}
           pagination={true}
-          // loading={!WarehouseList ? true : false}
+          loading={!companyList ? true : false}
         />
       </styled.Wrapper>
       <UpdateWarehouse

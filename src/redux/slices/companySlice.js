@@ -18,7 +18,7 @@ export const getCompanyList = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const response = await adminHttp.get(`/company`);
-
+      console.log(response.data,"jsds''''");
       return thunkAPI.fulfillWithValue(response.data?.items);
     } catch (error) {
       notification.error({
