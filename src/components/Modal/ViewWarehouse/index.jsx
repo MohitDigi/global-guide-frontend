@@ -1,19 +1,19 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import PropTypes from "prop-types";
+import React from "react";
+import { useSelector } from "react-redux";
 
-import { Col, Divider, Row, Typography } from 'antd';
+import { Col, Divider, Image, Row, Typography } from "antd";
 
-import styled from './ViewWarehouse.style';
+import styled from "./ViewWarehouse.style";
 
 const { Text } = Typography;
 
-const ViewWarehouse = ({ viewModal, setViewModal }) => {
-  // const warehouse = useSelector(
-  //   (state) => state.warehouseReducer.singleWarehouseData
-  // );
-  // const { id, title, type, city, lat, long } = warehouse;
-
+const ViewCompany = ({ viewModal, setViewModal }) => {
+  const company = useSelector(
+    (state) => state.companyReducer?.singleCompanyData
+  );
+  // const { companyID, companyName, address, phone, imageUrl, description } = company;
+  // console.log(company);
   return (
     <styled.ModalWrapper
       open={viewModal}
@@ -21,83 +21,77 @@ const ViewWarehouse = ({ viewModal, setViewModal }) => {
       okText="Okay"
       onCancel={() => setViewModal(false)}
       closeIcon={false}
-      width={'25.5rem'}
+      width={"25.5rem"}
     >
-      <styled.Title>Warehouse View</styled.Title>
+      <styled.Title>Company View</styled.Title>
       <Row>
         <Col span={12}>
           <Text>
-            <strong>ID</strong>
+            <strong>Company ID</strong>
           </Text>
         </Col>
         <Col span={12}>
-          {/* <Text type="danger">{id}</Text> */}
+          <Text type="danger">{company?.companyID}</Text>
         </Col>
       </Row>
       <Divider />
       <Row>
         <Col span={12}>
           <Text>
-            <strong>Warehouse Name</strong>
+            <strong>Company Image</strong>
           </Text>
         </Col>
         <Col span={12}>
-          {/* <Text>{title}</Text> */}
+          <Image
+            src={company?.imageUrl ? company?.imageUrl : "/profile.svg"}
+            alt="company-img"
+            width={65}
+            height={65}
+          />
         </Col>
       </Row>
       <Divider />
       <Row>
         <Col span={12}>
           <Text>
-            <strong>Shipments</strong>
+            <strong>Company Name</strong>
           </Text>
         </Col>
         <Col span={12}>
-          <Text>7</Text>
+          <Text>{company?.companyName}</Text>
         </Col>
       </Row>
       <Divider />
       <Row>
         <Col span={12}>
           <Text>
-            <strong>Type</strong>
+            <strong>Address</strong>
           </Text>
         </Col>
         <Col span={12}>
-          {/* <Text>{type}</Text> */}
+          <Text>{company?.address}</Text>
         </Col>
       </Row>
       <Divider />
       <Row>
         <Col span={12}>
           <Text>
-            <strong>Location</strong>
+            <strong>Phone</strong>
           </Text>
         </Col>
         <Col span={12}>
-          {/* <Text>{city}</Text> */}
+          <Text>{company?.phone}</Text>
         </Col>
       </Row>
       <Divider />
       <Row>
         <Col span={12}>
           <Text>
-            <strong>Latitude</strong>
+            <strong>Description</strong>
           </Text>
         </Col>
         <Col span={12}>
-          {/* <Text>{lat}</Text> */}
-        </Col>
-      </Row>
-      <Divider />
-      <Row>
-        <Col span={12}>
-          <Text>
-            <strong>Longitude</strong>
-          </Text>
-        </Col>
-        <Col span={12}>
-          {/* <Text>{long}</Text> */}
+          <Text>{company?.description}</Text>
         </Col>
       </Row>
       <Divider />
@@ -105,8 +99,8 @@ const ViewWarehouse = ({ viewModal, setViewModal }) => {
   );
 };
 
-export default ViewWarehouse;
-ViewWarehouse.propTypes = {
+export default ViewCompany;
+ViewCompany.propTypes = {
   viewModal: PropTypes.any,
   setViewModal: PropTypes.any,
 };
