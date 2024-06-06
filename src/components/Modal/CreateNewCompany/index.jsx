@@ -15,7 +15,7 @@ const CreateNewTicket = ({ open, onClose, filters }) => {
   const dispatch = useDispatch();
 
   const [file, setFile] = useState(null);
-  console.log(file, 'file::::::::::::::;')
+  console.log("file::::::::::::::;", file);
 
   useEffect(() => {
     if (!open) {

@@ -60,62 +60,6 @@ function LayoutContainer() {
           ? "/svg-icons/ic_warehouse.svg"
           : "/svg-icons/ic_warehouse_unselect.svg",
     },
-    {
-      key: "/panel/shipment",
-      name: "shipment",
-      label: "Shipment",
-      src:
-        selectedKeys === "/panel/shipment"
-          ? "/svg-icons/ic_shipment.svg"
-          : "/svg-icons/ic_shipment_unselect.svg",
-    },
-    {
-      key: "/panel/invoice",
-      name: "invoice",
-      label: "Invoice",
-      src:
-        selectedKeys === "/panel/invoice"
-          ? "/svg-icons/ic_invoice.svg"
-          : "/svg-icons/ic_invoice_unselect.svg",
-    },
-    {
-      key: "/panel/inventory",
-      name: "inventory",
-      label: "Inventory",
-      src:
-        selectedKeys === "/panel/inventory"
-          ? "/svg-icons/ic_inventory.svg"
-          : "/svg-icons/ic_inventory_unselect.svg",
-    },
-    {
-      key: "/panel/users-management",
-      name: "users_management",
-      label: "Users Management",
-      src:
-        selectedKeys === "/panel/users-management"
-          ? "/svg-icons/ic_user management.svg"
-          : "/svg-icons/ic_user management_unselect.svg",
-      children: [
-        {
-          key: "/panel/users-management/customer",
-          name: "customer",
-          label: "Customer",
-          src:
-            selectedKeys === "/panel/users-management/customer"
-              ? "/svg-icons/ic_customer.svg"
-              : "/svg-icons/ic_customer_unselect.svg",
-        },
-        {
-          key: "/panel/users-management/driver",
-          name: "driver",
-          label: "Driver",
-          src:
-            selectedKeys === "/panel/users-management/driver"
-              ? "/svg-icons/ic_driver.svg"
-              : "/svg-icons/ic_driver_unselect.svg",
-        },
-      ],
-    },
   ];
 
   const dropdownItems = [

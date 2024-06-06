@@ -15,6 +15,11 @@ import Delete from "../../Modal/Delete";
 import UpdateWarehouse from "../../Modal/UpdateWarehouse";
 import ViewWarehouse from "../../Modal/ViewWarehouse";
 import styled from "./CompanyTable.style";
+import {
+  deleteCompany,
+  getCompanyList,
+  getOneCompany,
+} from "../../../redux/slices/companySlice";
 
 const CompanyTable = ({ filters }) => {
   const dispatch = useDispatch();
@@ -31,16 +36,27 @@ const CompanyTable = ({ filters }) => {
   const [id, setId] = useState();
 
   // useEffect(() => {
-  //   dispatch(getWarehouse(filters));
+  //   dispatch(getCompanyList(filters));
   // }, []);
-
+  console.log(companyList);
   const columns = [
     {
       title: "Company ID",
       dataIndex: "companyID",
       key: "companyID",
-      render: (_, record) => <span>{record.companyID ? record.companyID : "N/A"}</span>,
-      width: "126.86px",
+      render: (_, record) => (
+        <span>{record.companyID ? record.companyID : "N/A"}</span>
+      ),
+      width: "16.86px",
+    },
+    {
+      title: "Company Image",
+      dataIndex: "imageUrl",
+      key: "imageUrl",
+      render: (_, record) => (
+        <span>{record.imageUrl ? record.imageUrl : "N/A"}</span>
+      ),
+      width: "226.86px",
     },
     {
       title: "Company Name",
@@ -54,24 +70,26 @@ const CompanyTable = ({ filters }) => {
       width: 200,
     },
     {
-      title: "Shipments",
-      dataIndex: "shipments",
+      title: "Description",
+      dataIndex: "description",
       render: (_, record) => (
-        <span>{record.shipment ? record.shipment : "N/A"}</span>
+        <span>{record.description ? record.description : "N/A"}</span>
       ),
       width: "126.86px",
     },
     {
-      title: "Type",
-      dataIndex: "type",
-      render: (_, record) => <span>{record.type ? record.type : "N/A"}</span>,
+      title: "Phone",
+      dataIndex: "phone",
+      render: (_, record) => <span>{record.phone ? record.phone : "N/A"}</span>,
       width: "126.86px",
     },
     {
       title: "Location",
-      dataIndex: "city",
-      key: "city",
-      render: (_, record) => <span>{record.city ? record.city : "N/A"}</span>,
+      dataIndex: "address",
+      key: "address",
+      render: (_, record) => (
+        <span>{record.address ? record.address : "N/A"}</span>
+      ),
       width: "126.86px",
     },
     {
@@ -88,7 +106,7 @@ const CompanyTable = ({ filters }) => {
                   className="actions"
                   onClick={() => {
                     setViewModal(true);
-                    // dispatch(getOneWarehouse(record.id));
+                    dispatch(getOneCompany(record.companyID));
                   }}
                 >
                   View
@@ -96,7 +114,7 @@ const CompanyTable = ({ filters }) => {
                 <div
                   className="actions"
                   onClick={() => {
-                    // dispatch(getOneWarehouse(record.id));
+                    dispatch(getOneWarehouse(record.companyID));
                     setId(record.id);
                     setUpdateModal(true);
                     // dispatch(getCountries());
@@ -107,7 +125,7 @@ const CompanyTable = ({ filters }) => {
                 <div
                   className="actions"
                   onClick={() => {
-                    setId(record.id);
+                    setId(record.companyID);
                     setDeleteModal(true);
                   }}
                 >
@@ -125,9 +143,9 @@ const CompanyTable = ({ filters }) => {
   ];
 
   const deleteHandler = () => {
-    // dispatch(deleteWarehouse(id)).then(() => {
-    //   dispatch(getWarehouse(filters));
-    // });
+    dispatch(deleteCompany(id)).then(() => {
+      dispatch(getCompanyList());
+    });
     setDeleteModal(false);
   };
 
@@ -147,7 +165,7 @@ const CompanyTable = ({ filters }) => {
         updateModal={updateModal}
         setUpdateModal={setUpdateModal}
         id={id}
-        filters={filters}
+        // filters={filters}
       />
       <ViewWarehouse viewModal={viewModal} setViewModal={setViewModal} />
       <Delete

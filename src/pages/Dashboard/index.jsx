@@ -103,8 +103,8 @@ function DashboardPage() {
         >
           <div className="stats-info">
             <div>
-              <div className="stats-title">Total Shipment</div>
-              <div className="stats-desc">USD 54
+              <div className="stats-title">Total Sales</div>
+              <div className="stats-desc">USD $76754
               {/* {dashboardData?.total} */}
               </div>
             </div>
@@ -133,7 +133,7 @@ function DashboardPage() {
             <div>
               <div className="stats-title">Account Receivable</div>
               <div className="stats-desc">
-                23
+                USD $453423
                 {/* {dashboardData?.account} */}
                 </div>
             </div>

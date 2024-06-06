@@ -7,7 +7,7 @@ import { adminHttp } from "../../libs/http";
 const initialState = {
   isLoading: false,
   data: null,
-  singleCompanyData: {},
+  singleCompanyData: null,
   createCompanyData: {},
   updateCompanyData: {},
 };
@@ -18,7 +18,7 @@ export const getCompanyList = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const response = await adminHttp.get(`/company`);
-      console.log(response.data,"jsds''''");
+      console.log(response.data, "jsds''''");
       return thunkAPI.fulfillWithValue(response.data?.items);
     } catch (error) {
       notification.error({
@@ -34,9 +34,9 @@ export const getOneCompany = createAsyncThunk(
   "application/getOneCompany",
   async (id, thunkAPI) => {
     try {
-      const response = await adminHttp.get(`/company/${id}`);
-
-      return thunkAPI.fulfillWithValue(response.data.data);
+      const response = await adminHttp.get(`/company/getCompanyByID/${id}`);
+      console.log(response.data, "comapny==ass=sss======");
+      return thunkAPI.fulfillWithValue(response.data.dataValues);
     } catch (error) {
       notification.error({
         message: error.message,
@@ -74,7 +74,7 @@ export const updateCompany = createAsyncThunk(
   async (requestData, thunkAPI) => {
     const { id, data } = requestData;
     try {
-      const response = await adminHttp.put(`/company/${id}`, data);
+      const response = await adminHttp.put(`/company/update${id}`, data);
 
       if (!response.data.success)
         return thunkAPI.rejectWithValue(response.data.msg);
@@ -97,7 +97,7 @@ export const deleteCompany = createAsyncThunk(
   "application/deleteCompany",
   async (id, thunkAPI) => {
     try {
-      const response = await adminHttp.delete(`/company/${id}`);
+      const response = await adminHttp.put(`/company/delete/${id}`);
       if (!response.data.success)
         return thunkAPI.rejectWithValue(response.data.msg);
 
